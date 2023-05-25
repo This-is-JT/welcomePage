@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,900&display=swap"
+      rel="stylesheet"
+    />
+    <title>Document</title>
+    <style>
+      * {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+      }
+      body {
+        background-color: #251749;
+        color: #fffbeb;
+        font-family: "Lato", sans-serif;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+      }
+
+      .box {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+
+      h4 {
+        font-size: 50px;
+        font-weight: 900;
+        font-style: italic;
+        letter-spacing: 2px;
+        text-align: center;
+      }
+
+      input {
+        font-family: inherit;
+        border: 0;
+        outline: none;
+        background-color: transparent;
+        border-bottom: 5px solid #fffbeb;
+        margin-top: 200px;
+        width: 650px;
+        text-align: center;
+        color: #9db2bf;
+        font-weight: 900;
+        font-size: 50px;
+        font-style: italic;
+      }
+
+      input:focus::placeholder {
+        color: transparent;
+      }
+
+      span {
+        display: inline;
+        font-size: 40px;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="box">
+      <h4>Always Look On The Bright Side Of Life</h4>
+      <div class="input-box">
+        <input type="text" placeholder="Things to-do..." id="toDo" />
+        <span id="btn" onclick="addItem()">✅</span>
+      </div>
+    </div>
+
+    <script>
+      let btn = document.getElementById("btn");
+      let toDo = document.getElementById("toDo");
+      let mark = false;
+
+      function addItem() {
+        if (mark) {
+          mark = false;
+          btn.innerText = "✅";
+          toDo.value = "";
+          toDo.readOnly = false;
+          window.localStorage.removeItem("todo");
+        } else {
+          mark = true;
+          btn.innerText = "❎";
+          toDo.readOnly = true;
+          window.localStorage.setItem("todo", toDo.value);
+        }
+      }
+
+      let data = window.localStorage.getItem("todo");
+      if (data) {
+        document.getElementById("toDo").value = data;
+        addItem();
+      }
+    </script>
+  </body>
+</html>
